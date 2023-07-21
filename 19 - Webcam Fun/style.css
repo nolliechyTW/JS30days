@@ -1,0 +1,148 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 10px;
+  background: #d8a1a1;
+}
+
+.photobooth {
+  background: white;
+  max-width: 150rem;
+  margin: 2rem auto;
+  border-radius: 2px;
+}
+
+/*clearfix*/
+.photobooth:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.photo {
+  width: 100%;
+  float: left;
+}
+
+.player {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width:200px;
+}
+
+/*
+  Strip!
+*/
+
+.strip {
+  padding: 2rem;
+}
+
+.strip img {
+  width: 100px;
+  overflow-x: scroll;
+  padding: 0.8rem 0.8rem 2.5rem 0.8rem;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  background: white;
+}
+
+.strip a:nth-child(5n+1) img { transform: rotate(10deg); }
+.strip a:nth-child(5n+2) img { transform: rotate(-2deg); }
+.strip a:nth-child(5n+3) img { transform: rotate(8deg); }
+.strip a:nth-child(5n+4) img { transform: rotate(-11deg); }
+.strip a:nth-child(5n+5) img { transform: rotate(12deg); }
+
+.controls{
+  display: flex;
+  align-items: center; /* Center the items (buttons) along the cross axis */
+  justify-content: center; /* Optionally, center the items (buttons) along the main axis */
+  flex-wrap: wrap; /* Allow items to wrap if they exceed the container's width */
+}
+
+button {
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: rgb(116, 155, 214);
+  color: white;
+  border: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* On hover, change the background color and add a slight shadow effect */
+button:hover {
+  background-color: #5d32d1;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* On click, change the background color to a darker shade */
+button:active {
+  background-color: #5d32d1;
+}
+
+.rgb {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Style the labels */
+.rgb label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+/* Style the range input sliders */
+.rgb input[type="range"] {
+  width: 180px;
+  margin-bottom: 10px;
+}
+
+/* Customize the appearance of the range input track and thumb */
+.rgb input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+/* Set the colors of the range input track and thumb based on the value */
+.rgb input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #6f9dee;
+  cursor: pointer;
+}
+
+.rgb input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #6f9dee;
+  cursor: pointer;
+}
+
+/* On hover, change the background color of the range input track */
+.rgb input[type="range"]::-webkit-slider-thumb:hover {
+  background-color: #6f9dee;
+}
+
+.rgb input[type="range"]::-moz-range-thumb:hover {
+  background-color: #6f9dee;
+}
