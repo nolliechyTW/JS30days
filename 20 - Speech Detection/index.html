@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Speech Detection</title>
+  <link rel="icon" href="https://fav.farm/✅" />
+</head>
+<body>
+
+  <div class="words" contenteditable>
+  </div>
+
+<script>
+// Check if the browser supports the SpeechRecognition API or fall back to webkitSpeechRecognition for compatibility.
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+// Create a new SpeechRecognition instance.
+const recognition = new SpeechRecognition();
+
+// Allow interim results, so the speech recognition updates as the user speaks.
+recognition.interimResults = true;
+
+// Set the language for speech recognition to English (United States).
+recognition.lang = 'en-US';
+
+// Create a new <p> element to hold the transcribed speech text.
+let p = document.createElement('p');
+
+// Find the element with the class 'words' and append the newly created <p> element to it.
+const words = document.querySelector('.words');
+words.appendChild(p);
+
+// Add an event listener for the 'result' event, which fires when the speech recognition engine has transcribed speech.
+recognition.addEventListener('result', e => {
+  // Extract the transcribed speech from the event results and concatenate them into a single string.
+  const transcript = Array.from(e.results)
+    .map(result => result[0])
+    .map(result => result.transcript)
+    .join('');
+
+  // Replace any occurrence of offensive words like "poop," "poo," "shit," or "dump" with the poop emoji '💩'.
+  const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
+  
+  // Set the text content of the <p> element to the cleaned-up transcribed speech.
+  p.textContent = poopScript;
+
+  // If the speech recognition result is final (not an interim result), create a new <p> element for the next speech.
+  // so that it won't write off the old one
+  if (e.results[0].isFinal) {
+    p = document.createElement('p');
+    words.appendChild(p);
+  }
+
+  if(transcript.include('get some water')){
+    console.log('Getting some water...')
+  }
+
+});
+
+// Add an event listener for the 'end' event, which fires when speech recognition ends.
+// When the recognition ends, restart the recognition process to allow continuous speech recognition.
+recognition.addEventListener('end', recognition.start);
+
+// Start the speech recognition process.
+recognition.start();
+</script>
+
+
+  <style>
+    html {
+      font-size: 10px;
+    }
+
+    body {
+      background: #ce8dc2;
+      font-family: 'helvetica neue';
+      font-weight: 200;
+      font-size: 20px;
+    }
+
+    .words {
+      max-width: 500px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      padding: 1rem 2rem 1rem 5rem;
+      background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+      background-size: 100% 3rem;
+      position: relative;
+      line-height: 3rem;
+    }
+
+    p {
+      margin: 0 0 3rem;
+    }
+
+    .words:before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      top: 0;
+      left: 30px;
+      bottom: 0;
+      border: 1px solid;
+      border-color: transparent #efe4e4;
+    }
+  </style>
+
+</body>
+</html>
